@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="utf-8">
-	<title>Наш магазин</title>
-	<link rel="stylesheet" type="text/css" href="/static/geekshopMU/style.css">
-	<link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
-</head>
-
-<body>
-	<div class="cont">
+{% extends 'geekshopMU/base.html' %}
+{% load static %}
+{% block content %}
 		<div class="main-theme">
 			<div class="header clearfix">
-
-				<ul class="menu-main">
-					<li><a href="/" class="active">Главная</a></li>
-					<li><a href="/products/">Наша продукция</a></li>
-					<li><a href="/contacts/">Наши контакты</a></li>
-				</ul>
-				<a href="#" class="searcher"></a>
+				{% include 'geekshopMU/includes/main_menu.html' %}
 			</div>
 			<div class="text-slider">
-				<h3 class="green">ООО "МАГАЗИН ФК МАН ЮНАЙТЕД 056"</h3>
-				<h3 class="green">Футбольная атрибутика</h3>
-				<h5 class="big">Манчестер Юнайтед - наш любимый футбольный клуб!</h5>
+				{{ object.name|title }}
+				<h3 class="green">ООО "МАГАЗИН ФК МАН ЮНАЙТЕД 056" дата {% now "d.m.Y"%}</h3>
+				<h3 class="green">Футбольная атрибутика тенденции {% now "Y"%} года</h3>
+				<h5 class="big">Манчестер Юнайтед - лучший футбольный клуб {% now "Y"%} года!</h5>
 			</div>
 			<div class="navi">
 				<a href="#"></a><a href="#"></a><a href="#"></a>
@@ -66,40 +52,4 @@
 
 		</div>
 
-		<div class="pvd"></div>
-
-	</div>
-
-	<div class="footer">
-		<div class="clearfix">
-			<div class="text-footer">
-				<h3>контакты</h3>
-				<p>Директор: Дубинин В.Ю. Телефон 7-111-199-2123</p>
-			</div>
-			<div class="text-footer">
-				<h3>Информация для справки</h3>
-				<p>Ценовая политика условная!</p>
-			</div>
-			<div class="text-footer clearfix">
-				<h3>Обратная связь с нами</h3>
-				<p>Подписаться на новости и рассылки</p>
-				<form>
-					<input type="email" name="email" placeholder="Введите Ваш email">
-					<a href="#"><i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i></a>
-				</form>
-			</div>
-		</div>
-		<p class="small">&copy; GEEK UNIVERSITY PYTHON-разработки 12.2021 (данный сайт является учебным!)</p>
-		<div class="social">
-			<p>Поделитесь в: </p>
-			<a href="#" class="social1"></a>
-			<a href="#" class="social2"></a>
-			<a href="#" class="social3"></a>
-			<a href="#" class="social4"></a>
-		</div>
-	</div>
-	<a href="#" class="button-order">Телефон горячей линии: <br> 7-456-241-8271</a>
-
-</body>
-
-</html>
+{% endblock %}
