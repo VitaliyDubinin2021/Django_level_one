@@ -45,15 +45,15 @@ html, body {
 	position: relative;
 }
 
-.menu-main {
+.menu {
 	list-style-type: none;
 	margin-top: 100px;
 	float: right;
 }
-.menu-main li {
+.menu li {
 	float: left;
 }
-.menu-main a {
+.menu a {
 	color: blue;
 	font-size: 18px;
 	font-weight: 725;
@@ -62,17 +62,17 @@ html, body {
 	text-decoration: none;
 	padding: 11px 12px;
 }
-.menu-main .active {
+.menu .active {
 	color: red;
 	font-weight: 725;
 	border-bottom: 3px solid #212121;
 }
-.menu-main a:hover {
+.menu a:hover {
 	color: darkred;
 	font-weight: 725;
 	border-bottom: 5px white;
 }
-.menu-main a:active {
+.menu a:active {
 	color: white;
 	font-weight: 725;
 	border-bottom: 5px white;
@@ -249,13 +249,13 @@ html, body {
 	padding-left: 98px;
 	padding-right: 98px;
 }
-.featured-menu-main {
+.featured-menu {
 	margin-top: 125px;
 	width: 320px;
 	height: 52px;
 	float: right;
 }
-.featured-menu-main a {
+.featured-menu a {
 	color: #6c6c6c;
 	font-size: 36px;
 	font-weight: 700;
@@ -266,7 +266,7 @@ html, body {
 	padding-right: 13px;
 	padding-left: 9px;
 }
-.featured-menu-main .active {
+.featured-menu .active {
 	font-size: 36px;
 	font-weight: 700;
 	text-align: left;
@@ -274,14 +274,14 @@ html, body {
 	border-bottom: 3px solid #212121;
 	padding-bottom: 8px;
 }
-.featured-menu-main a:hover {
+.featured-menu a:hover {
 	font-size: 36px;
 	font-weight: 700;
 	color: #212121;
 	border-bottom: 3px solid #212121;
 	padding-bottom: 8px;
 }
-.featured-menu-main a:active {
+.featured-menu a:active {
 	font-size: 36px;
 	font-weight: 700;
 	color: #6c6c6c;

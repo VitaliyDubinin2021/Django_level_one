@@ -8,6 +8,7 @@ def products(request):
         {'href': 'products_huge', 'name': 'Для взрослых'},
         {'href': 'products_kids', 'name': 'Для детей'},
     ]
+
     context = {
         'title': title,
         'links_menu': links_menu,
