@@ -5,11 +5,10 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>{{title}}</title>
+	<title>{{title|title}}</title>
 	<link rel="stylesheet" type="text/css" href="{% static '/geekshopMU/style.css' %}">
 	<link rel="stylesheet" href="{% static '/geekshopMU/fonts/font-awesome/css/font-awesome.css' %}">
 	{% block css %}
-
 	{% endblock%}
 </head>
 <body>
@@ -17,7 +16,6 @@
 		{% block content %}
 		{% endblock %}
 		<div class="pvd"></div>
-
 	</div>
 
 	<div class="footer">
@@ -47,9 +45,8 @@
 			<a href="#" class="social3"></a>
 			<a href="#" class="social4"></a>
 		</div>
-	</div>
 	<a href="#" class="button-order">Телефон горячей линии: <br> 7-456-241-8271</a>
+	</div>
 
 </body>
-
 </html>

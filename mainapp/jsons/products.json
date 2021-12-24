@@ -1,0 +1,29 @@
+[
+  {
+      "category": 1,
+      "name": "Дом",
+      "image": "products_images/product-1.jpg",
+      "short_desc": "Уникальный дизайн",
+      "description": "Супер сфера",
+      "price": "3500.00",
+      "quantity": 10
+  },
+    {
+      "category": 4,
+      "name": "Стулья",
+      "image": "products_images/product-2.jpg",
+      "short_desc": "Удобный стул для всех",
+      "description": "",
+      "price": "14500.00",
+      "quantity": 10
+  },
+    {
+      "category": 3,
+      "name": "Дом",
+      "image": "products_images/product-1.jpg",
+      "short_desc": "Уникальный дизайн",
+      "description": "Супер сфера",
+      "price": "3500.00",
+      "quantity": 10
+  }
+]
