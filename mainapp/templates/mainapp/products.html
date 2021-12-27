@@ -9,27 +9,56 @@
 {% block content %}
 		<div class="hero-white">
 			<div class="header clearfix">
-
 				{% include 'geekshopMU/includes/main_menu.html' %}
-				<a href="#" class="basket"></a>
+                <a href="#" class="basket"></a>
 			</div>
 		</div>
-		<br>
-		<hr>
-		<div class="details">
-			<div class=""links clearfix">
-			<ul class="links-menu">
-				{% for link in links_menu%}
-				<li><a href="{{link.href}}" class="{% if request.resolver_match.route == link.href %} active {% endif %}">{{link.name}}</a></li>
-				{% endfor %}
-			</ul>
-		</div>
-<!--		</div>-->
-		<br>
-		<br>
-		<hr>
 
-		<div class="one-products">
+		<div class="details">
+			<div class="links clearfix">
+
+				<ul class="links-menu">
+                    <li>
+                        <a href="{% url 'products:category' 0 %}"
+                           class="{% if request.resolver_match.kwargs.pk == 0 %}active{% endif %}">ВСЕ КАТЕГОРИИ
+                        </a>
+                    </li>
+					{% for link in links_menu %}
+						<li>
+                            <a href="{% url 'products:category' link.pk %}"
+                               class="{% if request.resolver_match.kwargs.pk|add:'0' == link.pk %} active {% endif %}">
+                                {{link.name}}
+                            </a>
+                        </li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="details-products">
+				<div class="details-slider">
+					<div class="slider-product">
+						<img src="{% static '/geekshopMU/img/slider1.jpg' %}">
+					</div>
+					<div class="slider-control">
+						<div class="block">
+							<a href="#"><img src="{% static '/img/controll.jpg' %}" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+						<div class="block">
+							<a href="#"><img src="{% '/img/controll1.jpg' %}" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+						<div class="block">
+							<a href="#"><img src="{% '/img/controll2.jpg' %}" alt="">
+								<div class="text"></div>
+							</a>
+						</div>
+					</div>
+				</div>
+
+						<div class="one-products">
 			<div class="main-our-slide">
 				<div class="slide-one-product">
 					<img src="{% static '/geekshopMU/img/photo_1.jpg' %}">
@@ -54,1090 +83,89 @@
 		</div>
 		<hr>
 
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_2.jpg' %}">
-				</div>
-			</div>
+                <div class="products_list">
+                  <div class="title clearfix">
+                      {% if category %}
+                        <h2>
+                          Категория: "{{ category.name|title }}"
+                        </h2>
+                      {% endif %}
+                  </div>
+                  <div class="related-products clearfix">
 
-			<div class="describe">
-				<h2 class="big-bold">Продукция №2</h2>
-				<h2 class="big-bold">Сумка через плечо ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 27%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1752.75 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: 100% полиэстер!</p>
-					<p>Доставим Вам от 3 от 14 дней от 120 рублей!</p>
-					<p>Цвет: черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
+                    {% for product in products %}
+                      <div class="block">
+                        <a href="#">
+                          <img src="/media/{{ product.image }}" alt="product">
+                          <div class="text">
+                            <img src="{% static 'img/icon-hover.png' %}" alt="hover">
+                              <h4>{{ product.name }}</h4>
+                              <p>{{ product.description }}</p>
+                          </div>
+                        </a>
+                      </div>
+                    {% endfor %}
 
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_3.jpg' %}">
-				</div>
-			</div>
+                  </div>
 
-			<div class="describe">
-				<h2 class="big-bold">Продукция №3</h2>
-				<h2 class="big-bold">Обложка для паспорта матовая кожа</h2>
-				<h3 class="red">Горячее предложение (скидка 33%, цена указана с учетом скидки)</h3>
-				<p class="price"> 455.55 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер (формат паспорта гражданина РФ)</p>
-					<p>Доставим Вам от 3 от 14 дней от 120 рублей!</p>
-					<p>Цвет: черный, красный, зеленый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
 
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_4.jpg' %}">
+			<div class="related">
+				<div class="title clearfix">
+					<h2>Похожие продукты</h2>
+					<a class="explore" href="#">показать все <img src="{% '/img/arrow.png' %}" alt=""></a>
 				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №4</h2>
-				<h2 class="big-bold">Чехол для Iphone 11 матовый</h2>
-				<h3 class="red">Горячее предложение (скидка 15%, цена указана с учетом скидки)</h3>
-				<p class="price"> 750.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер (размер Iphone 11)</p>
-					<p>Состав: силикон </p>
-					<p>Цвет: красный </p>
+				<div class="related-products clearfix">
+                    {% for product in products %}
+                        <div class="block">
+                            <a href="{% url 'basket:add' pk=product.pk %}"><img src="/media/{{ product.image }}" alt="">
+                                <div class="text">
+                                    <img src="img/icon-hover.png" alt="img">
+                                    <h4>{{ product.name }}</h4>
+                                    <p>{{ product.description }} </p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
 				</div>
 			</div>
 		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_5.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №5</h2>
-				<h2 class="big-bold">Кружка с полной запечаткой</h2>
-				<h3 class="red">Горячее предложение (скидка 22%, цена указана с учетом скидки)</h3>
-				<p class="price"> 450.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер</p>
-					<p>Состав: керамика </p>
-					<p>Цвет: кант черный, кант синий, кант зеленый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_6.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №6</h2>
-				<h2 class="big-bold">Тарелка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 32%, цена указана с учетом скидки)</h3>
-				<p class="price"> 320.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Состав: фосфор </p>
-					<p>Цвет: белый, красный, коричневый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_7.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №7</h2>
-				<h2 class="big-bold">Часы настенные ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 17%, цена указана с учетом скидки)</h3>
-				<p class="price"> 790.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Часы: кварцевые </p>
-					<p>Цвет: белый, красный, фисташковый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_8.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №8</h2>
-				<h2 class="big-bold">Поясная сумка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 15%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1315.25 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Состав: полиэстер </p>
-					<p>Цвет: красно-черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_9.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №9</h2>
-				<h2 class="big-bold">Женский рюкзак ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 10%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1850.75 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Состав: полиэстер </p>
-					<p>Цвет: красно-белый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_10.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №10</h2>
-				<h2 class="big-bold">Пенал школьный ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 10%, цена указана с учетом скидки)</h3>
-				<p class="price"> 350.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Состав: полиэстер </p>
-					<p>Цвет: красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_11.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №11</h2>
-				<h2 class="big-bold">Сумка через плечо ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 18%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1250.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Состав: полиэстер </p>
-					<p>Цвет: красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_12.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №12</h2>
-				<h2 class="big-bold">Сумка через плечо ФК "МЮ"</h2>
-				<h3 class="red">Сумка через плечо (скидка 10%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1350.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Состав: полиэстер </p>
-					<p>Цвет: черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_13.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №13</h2>
-				<h2 class="big-bold">Записная книжка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 30%, цена указана с учетом скидки)</h3>
-				<p class="price"> 100.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Состав: бумага </p>
-					<p>Цвет: красно-белый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_14.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №14</h2>
-				<h2 class="big-bold">Тетрадь ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 40%, цена указана с учетом скидки)</h3>
-				<p class="price"> 65.50 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Один размер </p>
-					<p>Состав: бумага </p>
-					<p>Цвет: красно-белый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_15.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №15</h2>
-				<h2 class="big-bold">Мужская футболка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 40%, цена указана с учетом скидки)</h3>
-				<p class="price"> 65.50 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры: </p>
-					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62) </p>
-					<p>Цвет: красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_16.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №16</h2>
-				<h2 class="big-bold">Пляжный полотенец ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 20%, цена указана с учетом скидки)</h3>
-				<p class="price"> 950.50 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 50%, хлопок 50%</p>
-					<p>Размер: один</p>
-					<p>Цвет: красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_17.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №17</h2>
-				<h2 class="big-bold">Футболка №18 Бруну Фернандеш</h2>
-				<h3 class="red">Горячее предложение (скидка 38%, цена указана с учетом скидки)</h3>
-				<p class="price"> 990.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры: </p>
-					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62) </p>
-					<p>Цвет: красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_18.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №18</h2>
-				<h2 class="big-bold">Мужской лонгслив ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 20%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1390.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: хлопок 100%! </p>
-					<p>Размеры: </p>
-					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62) </p>
-					<p>Цвет: черный, темно-синий </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_19.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №19</h2>
-				<h2 class="big-bold">Футболка №7 Криштиану Роналду образца 2008 года</h2>
-				<h3 class="red">Горячее предложение (скидка 15%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1550.75 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100%! </p>
-					<p>Размеры: </p>
-					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62) </p>
-					<p>Цвет: красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_20.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №20</h2>
-				<h2 class="big-bold">Мужской свитшот ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 25%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1450.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: хлопок 100%! </p>
-					<p>Размеры: </p>
-					<p>XS(44-46), S(48), M(50), XL(54), XXL(56-58), XXXL(60-62), 4XL(64-66), 5XL(68-70), 6XL(72-74),
-						7XL(76-78) </p>
-					<p>Цвет: белый, серый, темно-синий, меланж </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_21.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №21</h2>
-				<h2 class="big-bold">Маска защитная</h2>
-				<h3 class="red">Горячее предложение (скидка 30%, цена указана с учетом скидки)</h3>
-				<p class="price"> 690.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: внешний слой — 100% полиэфир (activcool), внутренний слой — 100% хлопок, одноразовые
-						фильтры в комплекте (5 шт.) — мельтблаун </p>
-					<p>Размеры: </p>
-					<p>S, L </p>
-					<p>Цвет: черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_22.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №22</h2>
-				<h2 class="big-bold">Штаны ФК "МЮ"</h2>
-				<p class="price"> 2200.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: внешний слой — 100% полиэфир (activcool), внутренний слой — 100% хлопок, одноразовые
-						фильтры в комплекте (5 шт.) — мельтблаун </p>
-					<p>Размеры: </p>
-					<p>S, L XS (46), S (48), M (50), L (52), XL (54), XXL (56-58), XXXL (60-62), 4XL (64-66),5XL
-						(68-70), 6XL (72-74), 7XL (76-78)</p>
-					<p>Цвет: черно-красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_23.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №23</h2>
-				<h2 class="big-bold">Мужские шорты ФК "МЮ"</h2>
-				<p class="price"> 1550.75 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: 100% </p>
-					<p>Размеры: </p>
-					<p>XXS (44), XS (46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (62)</p>
-					<p>Цвет: красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_24.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №24</h2>
-				<h2 class="big-bold">Футболка №10 Рууд ван Нистелрой образца 2005 года</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1490.75 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры: </p>
-					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62) </p>
-					<p>Цвет: белый, красный, темно-синий, желтый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_25.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №25</h2>
-				<h2 class="big-bold">Футболка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1445.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры: </p>
-					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62) </p>
-					<p>Цвет: белый, красный, темно-синий, желтый, черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_26.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №26</h2>
-				<h2 class="big-bold">Футболка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1445.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры: </p>
-					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62) </p>
-					<p>Цвет: белый, красный, темно-синий, желтый, черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_27.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №27</h2>
-				<h2 class="big-bold">Футболка №1 Давид де Хеа образца 2020 года</h2>
-				<h3 class="red">Горячее предложение (скидка 15%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1050.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: красный</p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_28.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №28</h2>
-				<h2 class="big-bold">Футболка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1490.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: белый, черный, красный, желтый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_29.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №29</h2>
-				<h2 class="big-bold">Футболка №16 Рой Кин образца 2003 года</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1490.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: белый, черный, красный, желтый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_30.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №30</h2>
-				<h2 class="big-bold">Футболка ФК "МЮ"</h2>
-				<p class="price"> 1600.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: хлопок 95%, эластан 5% </p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: белый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_31.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №31</h2>
-				<h2 class="big-bold">Футболка №7 Дэвид Бэкхэм</h2>
-				<p class="price"> 1540.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: хлопок 95%, эластан 5% </p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: белый, черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_32.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №32</h2>
-				<h2 class="big-bold">Футболка №9 Златан Ибрагимович образца 2017 года</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1490.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками! </p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: темно-синий, черный, белый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_33.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №33</h2>
-				<h2 class="big-bold">Плавки ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1230.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 85%, спандекс 15% </p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: красный, белый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_34.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №34</h2>
-				<h2 class="big-bold">Футболка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1445.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными харакеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: красный, белый, зеленый, синий, желтый</p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_35.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №35</h2>
-				<h2 class="big-bold">Пляжный полотенец ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 25%, цена указана с учетом скидки)</h3>
-				<p class="price"> 850.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 50%, хлопок 50%</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: красный, белый, зеленый, синий, желтый</p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_36.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №36</h2>
-				<h2 class="big-bold">Футболка Уэйн Руни №1</h2>
-				<h3 class="red">Горячее предложение (скидка 15%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1355.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными харакеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: красный, белый, зеленый, синий, желтый</p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_37.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №37</h2>
-				<h2 class="big-bold">Костюм ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 25%, цена указана с учетом скидки)</h3>
-				<p class="price"> 2575.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: хлопок 100%!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), 4XL (64-66)</p>
-					<p>Цвет: красный, белый, темно-синий </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_38.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №38</h2>
-				<h2 class="big-bold">Футболка Поль Погба</h2>
-				<h3 class="red">Горячее предложение (скидка 11%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1250.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: красный, белый, серый, черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_39.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №39</h2>
-				<h2 class="big-bold">Футболка №7 Алексис Санчес образца 2017 года</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1320.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: красный, белый, серый, черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_40.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №40</h2>
-				<h2 class="big-bold">Футболка №7</h2>
-				<h3 class="red">Горячее предложение (скидка 27%, цена указана с учетом скидки)</h3>
-				<p class="price"> 950.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: красный, белый, серый, черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_41.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №41</h2>
-				<h2 class="big-bold">Шапка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 15%, цена указана с учетом скидки)</h3>
-				<p class="price"> 750.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками!</p>
-					<p>Размеры: один размер</p>
-					<p>Цвет: черно-красный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_42.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №42</h2>
-				<h2 class="big-bold">Футболка №1 Давид де Хеа образца 2018 года</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1320.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: белый, темно-синий, черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_43.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №43</h2>
-				<h2 class="big-bold">Футболка №10 Маркус Рашфорд образца 2019 года</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1420.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: белый, темно-синий, черный, зеленый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_44.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №44</h2>
-				<h2 class="big-bold">Футболка ФК "МЮ"</h2>
-				<h3 class="red">Горячее предложение (скидка 12%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1490.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: белый, темно-синий, черный, зеленый </p>
-				</div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="one-products">
-			<div class="main-our-slide">
-				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_45.jpg' %}">
-				</div>
-			</div>
-
-			<div class="describe">
-				<h2 class="big-bold">Продукция №45</h2>
-				<h2 class="big-bold">Футболка №18 Пол Скоулз </h2>
-				<h3 class="red">Горячее предложение (скидка 25%, цена указана с учетом скидки)</h3>
-				<p class="price"> 950.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
-					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</a>
-				<div class="text-in-describe">
-					<p>Состав: полиэстер 100% с улучшенными характеристиками!</p>
-					<p>Размеры:</p>
-					<p>XS (44-46), S (48), M (50), L (52), XL (54), XXL (58), XXXL (60-62)</p>
-					<p>Цвет: белый, синий, красный, черный </p>
-				</div>
-			</div>
-		</div>
-		<hr>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--		<div class="one-products">-->
+<!--			<div class="main-our-slide">-->
+<!--				<div class="slide-one-product">-->
+<!--					<img src="{% static '/geekshopMU/img/photo_1.jpg' %}">-->
+<!--				</div>-->
+<!--			</div>-->
+
+<!--			<div class="describe">-->
+<!--				<h2 class="big-bold">Продукция №1</h2>-->
+<!--				<h2 class="big-bold">Футболка №7 Криштиану Роналду</h2>-->
+<!--				<h3 class="red">Горячее предложение (скидка 20%, цена указана с учетом скидки)</h3>-->
+<!--				<p class="price"> 1250.00 <span>рублей</span></p>-->
+<!--				<a href="#" class="product-button">-->
+<!--					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>-->
+<!--				</a>-->
+<!--				<div class="text-in-describe">-->
+<!--					<p>Состав: 100% полиэстер с улучшенными характеристиками!</p>-->
+<!--					<p>Доставим Вам от 3 от 14 дней от 120 рублей!</p>-->
+<!--					<p>Размеры: </p>-->
+<!--					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62)</p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<hr>-->
