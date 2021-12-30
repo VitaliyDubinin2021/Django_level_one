@@ -95,6 +95,7 @@ html, body {
 	position: absolute;
 	top: 63px;
 	left: 1210px;
+	width: 140 px;
 }
 
 .clearfix:after {

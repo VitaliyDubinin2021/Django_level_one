@@ -37,7 +37,7 @@
 			<div class="details-products">
 				<div class="details-slider">
 					<div class="slider-product">
-						<img src="{% static '/geekshopMU/img/slider1.jpg' %}">
+						<img src="{{ hot_product.image.url }}">
 					</div>
 					<div class="slider-control">
 						<div class="block">
@@ -66,18 +66,15 @@
 			</div>
 
 			<div class="describe">
-				<h2 class="big-bold">Продукция №1</h2>
+				<h2 class="big-bold">{{ hot_product.short_desc }}</h2>
 				<h2 class="big-bold">Футболка №7 Криштиану Роналду</h2>
 				<h3 class="red">Горячее предложение (скидка 20%, цена указана с учетом скидки)</h3>
-				<p class="price"> 1250.00 <span>рублей</span></p>
-				<a href="#" class="product-button">
+				<p class="price"> {{ hot_product.price }} <span>рублей</span></p>
+				<a href="{% url 'mainapp:detail' pk=hot_product.pk %}" class="product-button">
 					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
 				</a>
 				<div class="text-in-describe">
-					<p>Состав: 100% полиэстер с улучшенными характеристиками!</p>
-					<p>Доставим Вам от 3 от 14 дней от 120 рублей!</p>
-					<p>Размеры: </p>
-					<p>XS (44-46), S(48), M(50), L(52), XL(54), XXL(58), XXXL(60-62)</p>
+						{{ hot_product.description }}
 				</div>
 			</div>
 		</div>
@@ -95,7 +92,7 @@
 
                     {% for product in products %}
                       <div class="block">
-                        <a href="#">
+                        <a href="{% url 'mainapp:detail' pk=product.pk %}">
                           <img src="/media/{{ product.image }}" alt="product">
                           <div class="text">
                             <img src="{% static 'img/icon-hover.png' %}" alt="hover">
@@ -115,9 +112,9 @@
 					<a class="explore" href="#">показать все <img src="{% '/img/arrow.png' %}" alt=""></a>
 				</div>
 				<div class="related-products clearfix">
-                    {% for product in products %}
+                    {% for product in same_products %}
                         <div class="block">
-                            <a href="{% url 'basket:add' pk=product.pk %}"><img src="/media/{{ product.image }}" alt="">
+                            <a href="{% url 'mainapp:detail' pk=product.pk %}"><img src="/media/{{ product.image }}" alt="">
                                 <div class="text">
                                     <img src="img/icon-hover.png" alt="img">
                                     <h4>{{ product.name }}</h4>
