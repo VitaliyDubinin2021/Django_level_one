@@ -14,27 +14,23 @@ class Basket(models.Model):
         Product,
         on_delete=models.CASCADE,
     )
-    quantity = models.PositiveIntegerField(verbose_name='количество в заказе', default=0)
+    quantity = models.PositiveIntegerField(verbose_name='количество', default=0)
 
-    add_datetime = models.DateTimeField(verbose_name='время заказа', auto_now_add=True)
+    add_datetime = models.DateTimeField(verbose_name='время', auto_now_add=True)
 
+    @property
+    def product_cost(self):
+        return self.product.price * self.quantity
 
-@property
-def product_cost(self):
-    return self.product.price * self.quantity
+    @property
+    def total_quantity(self):
+        _items = Basket.objects.filter(user=self.user)
+        _total_quantity = sum(list(map(lambda x: x.quantity, _items)))
+        return _total_quantity
 
-
-@property
-def total_quantity(self):
-    _items = Basket.objects.filter(user=self.user)
-    _total_quantity = sum(list(map(lambda x: x.quantity, _items)))
-    return _total_quantity
-
-
-@property
-def total_cost(self):
-    _items = Basket.objects.filter(user=self.user)
-    _total_cost = sum(list(map(lambda x: x.product_cost, _items)))
-    return _total_cost
-
+    @property
+    def total_cost(self):
+        _items = Basket.objects.filter(user=self.user)
+        _total_cost = sum(list(map(lambda x: x.product_cost, _items)))
+        return _total_cost
 
