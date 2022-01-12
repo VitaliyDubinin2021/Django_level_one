@@ -1,4 +1,4 @@
-{% extends 'geekshopMU/base.html' %}
+{% extends 'geekshopmu/base.html' %}
 
 {% load static %}
 
@@ -9,7 +9,7 @@
 {% block content %}
 		<div class="hero-white">
 			<div class="header clearfix">
-				{% include 'geekshopMU/includes/main_menu.html' %}
+				{% include 'geekshopmu/includes/main_menu.html' %}
                 <a href="#" class="basket"></a>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 						<div class="one-products">
 			<div class="main-our-slide">
 				<div class="slide-one-product">
-					<img src="{% static '/geekshopMU/img/photo_1.jpg' %}">
+					<img src="{% static '/geekshopmu/img/photo_1.jpg' %}">
 				</div>
 			</div>
 
@@ -89,6 +89,23 @@
                       {% endif %}
                   </div>
                   <div class="related-products clearfix">
+
+                  <div class="paginator">
+					  {% if products.has_previous %}
+					  <a href="{% url 'products:page' category.pk products.previous_page_number %}">
+						  <
+					  </a>
+					  {% endif %}
+					  <span class="current">
+						  страница {{ products.number }} из
+						  {{ products.paginator.num_pages }}
+					  </span>
+					  {% if products.has_next %}
+					  <a href="{% url 'products:page' category.pk products.next_page_number %}">
+						  >
+					  </a>
+					  {% endif %}
+				  </div>
 
                     {% for product in products %}
                       <div class="block">

@@ -1,9 +1,9 @@
-{% extends 'geekshopMU/base.html' %}
+{% extends 'geekshopmu/base.html' %}
 {% load static %}
 {% block content %}
 		<div class="main-theme">
 			<div class="header clearfix">
-				{% include 'geekshopMU/includes/main_menu.html' %}
+				{% include 'geekshopmu/includes/main_menu.html' %}
 			</div>
 			<div class="text-slider">
 				{{ object.name|title }}
@@ -59,7 +59,6 @@
 			<div class="featured-menu">
 					<a class="active" href="#">Популярные</a><a href="#">Новинки</a>
 			</div>
-<!--			<a class="explore" href="#">показать все <img src="{% static '/geekshop/img/arrow.png' %}" alt=""></a>-->
 			<div class="clearfix">
 			</div>
 			<div class="tab-content">
@@ -67,7 +66,7 @@
 				<div class="block">
 					<a href="#"><img src="/media/{{ product.image }}" alt="">
 						<div class="text">
-							<img src="{% static '/geekshopMU/img/1-produce.jpg' %}" alt="img">
+							<img src="{% static '/geekshopmu/img/1-produce.jpg' %}" alt="img">
 							<h4>{{ product.name }}</h4>
 							<p>{{ product.short_desc }}</p>
 						</div>

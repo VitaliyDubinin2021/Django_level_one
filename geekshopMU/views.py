@@ -12,7 +12,7 @@ def index(request):
         'products': products,
         'basket': basket,
     }
-    return render(request, 'geekshopMU/index.html', context=context)
+    return render(request, 'geekshopmu/index.html', context=context)
 
 
 def contacts(request):
@@ -21,4 +21,4 @@ def contacts(request):
     context = {
         'title': title,
     }
-    return render(request, 'geekshopMU/contacts.html', context=context)
+    return render(request, 'geekshopmu/contacts.html', context=context)
