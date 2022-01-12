@@ -67,8 +67,8 @@
 
 			<div class="describe">
 				<h2 class="big-bold">{{ hot_product.short_desc }}</h2>
-				<h2 class="big-bold">Футболка №7 Криштиану Роналду</h2>
-				<h3 class="red">Горячее предложение (скидка 20%, цена указана с учетом скидки)</h3>
+				<h2 class="big-bold">Футболка №7 Криштиану Роналду скидка 25 % сегодня {% now "d.m.Y"%}! </h2>
+				<h3 class="red">Горячее предложение! Хит {% now "Y"%} года! </h3>
 				<p class="price"> {{ hot_product.price }} <span>рублей</span></p>
 				<a href="{% url 'mainapp:detail' pk=hot_product.pk %}" class="product-button">
 					заказать товар <i class="fa fa-chevron-right" aria-hidden="true"></i>
