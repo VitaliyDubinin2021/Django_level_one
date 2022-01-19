@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>{{title|title}}</title>
+	<link rel="stylesheet" type="text/css" href="{% static '/geekshopmu/style.css' %}">
+	<link rel="stylesheet" href="{% static '/geekshopmu/fonts/font-awesome/css/font-awesome.css' %}">
+
+	{% block css %}
+	{% endblock %}
+
+	{% block js %}
+	{% endblock %}
+</head>
+<body>
+	<div class="cont">
+		{% block content %}
+		{% endblock %}
+		<div class="pvd"></div>
+	</div>
+
+	<div class="footer">
+		<div class="clearfix">
+			<div class="text-footer">
+				<h3>контакты</h3>
+				<p>Директор: Дубинин В.Ю. Телефон 7-111-199-2123</p>
+			</div>
+			<div class="text-footer">
+				<h3>Информация для справки</h3>
+				<p>Ценовая политика условная!</p>
+			</div>
+			<div class="text-footer clearfix">
+				<h3>Обратная связь с нами</h3>
+				<p>Подписаться на новости и рассылки</p>
+				<form>
+					<input type="email" name="email" placeholder="Введите Ваш email">
+					<a href="#"><i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i></a>
+				</form>
+			</div>
+		</div>
+		<p class="small">&copy; GEEK UNIVERSITY PYTHON-разработки 12.2021 (данный сайт является учебным!)</p>
+		<div class="social">
+			<p>Поделитесь в: </p>
+			<a href="#" class="social1"></a>
+			<a href="#" class="social2"></a>
+			<a href="#" class="social3"></a>
+			<a href="#" class="social4"></a>
+		</div>
+	<a href="#" class="button-order">Телефон горячей линии: <br> 7-456-241-8271</a>
+	</div>
+
+</body>
+</html>

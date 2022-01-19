@@ -1,0 +1,29 @@
+[
+  {
+      "category": 1,
+      "name": "Для детей",
+      "image": "products_images/product-1.jpg",
+      "short_desc": "Уникальный дизайн",
+      "description": "Качественный товар",
+      "price": "1250.00",
+      "quantity": 10
+  },
+  {
+      "category": 4,
+      "name": "Для взрослых",
+      "image": "products_images/product-2.jpg",
+      "short_desc": "Уникальный дизайн",
+      "description": "Качественный товар",
+      "price": "650.00",
+      "quantity": 10
+  },
+    {
+      "category": 3,
+      "name": "Для мужчин",
+      "image": "products_images/product-1.jpg",
+      "short_desc": "Уникальный дизайн",
+      "description": "Качественный товар",
+      "price": "785.00",
+      "quantity": 10
+  }
+]

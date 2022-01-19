@@ -1,5 +1,5 @@
 """
-ASGI config for geekshopMU project.
+ASGI config for geekshopmu project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geekshopMU.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geekshopmu.settings')
 
 application = get_asgi_application()
