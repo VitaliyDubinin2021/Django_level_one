@@ -13,12 +13,12 @@ class Order(models.Model):
     CANCEL = "CNC"
 
     ORDER_STATUS_CHOICES = (
-        (FORMING, "формирование"),
-        (SENT_TO_PROCEED, "отправлено в обработку"),
-        (PAID, "оплачено"),
+        (FORMING, "формируется"),
+        (SENT_TO_PROCEED, "отправлен в обработку"),
+        (PAID, "оплачен"),
         (PROCEEDED, "обрабатывается"),
-        (READY, "готово к выдаче"),
-        (CANCEL, "отменено"),
+        (READY, "готов к выдаче"),
+        (CANCEL, "отменен"),
     )
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -58,7 +58,18 @@ class Order(models.Model):
         self.save()
 
 
+class OrderItemQuerySet(models.QuerySet):
+
+    def delete(self, *args, **kwargs):
+        for object in self:
+            object.product.quantity += object.quantity
+            object.product.save()
+        super(OrderItemQuerySet, self).delete(*args, **kwargs)
+
+
 class OrderItem(models.Model):
+    objects = OrderItemQuerySet.as_manager()
+
     order = models.ForeignKey(Order, related_name="orderitems", on_delete=models.CASCADE)
 
     product = models.ForeignKey(Product, verbose_name="продукт", on_delete=models.CASCADE)
@@ -67,3 +78,7 @@ class OrderItem(models.Model):
 
     def get_product_cost(self):
         return self.product.price * self.quantity
+
+    @staticmethod
+    def get_item(pk):
+        return OrderItem.objects.filter(pk=pk).first()
