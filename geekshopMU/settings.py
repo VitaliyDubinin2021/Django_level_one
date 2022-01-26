@@ -30,7 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'geekshopmu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'geekshop',
+        'NAME': 'geekshopmu',
         'USER': 'postgres',
         # 'PASSWORD': 'password',
         # 'HOST': 'db.example.com',
