@@ -5,14 +5,15 @@ from mainapp.models import Product
 
 
 def index(request):
-    title = 'GeekShopMu'
-    products = Product.objects.all()[:4]
+    title = 'GeekShop'
+    products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')[:3]
+
 
     context = {
         'title': title,
         'products': products,
     }
-    return render(request, 'geekshopmu/index.html', context)
+    return render(request, 'geekshop/index.html', context)
 
 
 def contacts(request):
@@ -20,4 +21,4 @@ def contacts(request):
     context = {
         'title': title,
     }
-    return render(request, 'geekshopmu/contacts.html', context)
+    return render(request, 'geekshop/contacts.html', context)
